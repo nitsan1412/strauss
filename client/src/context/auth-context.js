@@ -10,7 +10,6 @@ export function AuthProvider({ children }) {
     console.log("userData");
     fetchData("/auth/signIn", "login", null, userData)
       .then((res) => {
-        console.log("login data:", res);
         setJwt(res.token);
         // setUser(res.user);
       })
@@ -24,7 +23,6 @@ export function AuthProvider({ children }) {
   const register = async (userData) => {
     await fetchData("/auth/signup", "post", null, userData)
       .then(async (data) => {
-        console.log("/auth/signup data:", data);
         if (data.error) return data.error;
         await setUser(data.user);
         await login(data.user);

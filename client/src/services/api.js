@@ -1,3 +1,5 @@
+import { ListGroupItem } from "react-bootstrap";
+
 const URL = "http://localhost:8000";
 
 export default async function fetchData(url, chosenMethod, token, data) {
@@ -6,7 +8,10 @@ export default async function fetchData(url, chosenMethod, token, data) {
     case "get":
       options = {
         method: "GET",
-        Authorization: `Bearer ${token}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       };
       break;
     case "post":
@@ -59,8 +64,7 @@ export default async function fetchData(url, chosenMethod, token, data) {
   }
   const response = await fetch(`${URL}${url}`, options);
   if (response.ok) {
-    const data = await response.json();
-    return data; // Return the response data
+    return await response.json();
   } else {
     return response.Error;
   }

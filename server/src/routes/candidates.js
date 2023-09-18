@@ -11,7 +11,7 @@ const router = express.Router();
 // });
 
 // Example protected route that requires authentication
-router.get("/getAllcandidates", verifyToken, async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
   // Access user information from req.user
   // const { userId, username } = req.user;
   return candidatesController.getAllCandidates(req, res);

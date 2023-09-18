@@ -7,6 +7,8 @@ import { CandidatesProvider } from "./context/candidates-context";
 import Dashboard from "./pages/Dashboard";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import Candidate from "./pages/Candidate";
+
 import Layout from "./components/Layout";
 
 import Registration from "./pages/SignUp";
@@ -28,7 +30,7 @@ export default function App() {
                 </CandidatesProvider>
               }
             />
-
+            <Route path="/candidate/:candidateId" component={Candidate} />
             {/* <ProtectedRoute path="/" component={<Home />} /> */}
           </Routes>
         </Layout>
