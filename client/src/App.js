@@ -22,6 +22,15 @@ export default function App() {
             <Route path="/" element={<SignIn />} />
             {/* <Route path="/" element={<Home />} /> */}
             <Route path="/signup" element={<SignUp />} />
+
+            <Route
+              path="/candidate"
+              element={
+                <CandidatesProvider>
+                  <Candidate />
+                </CandidatesProvider>
+              }
+            />
             <Route
               path="/dashboard"
               element={
@@ -30,7 +39,7 @@ export default function App() {
                 </CandidatesProvider>
               }
             />
-            <Route path="/candidate/:candidateId" component={Candidate} />
+            {/* <Route path="/candidate/:candidateId" component={Candidate} /> */}
             {/* <ProtectedRoute path="/" component={<Home />} /> */}
           </Routes>
         </Layout>

@@ -9,7 +9,7 @@ export const useCandidates = () => useContext(CandidatesContext);
 export function CandidatesProvider({ children }) {
   const { jwt } = useAuth(); // Access the user object from the context
   const [candidates, setCandidates] = useState([]);
-  const [chosenCandidate, setChosenCandidate] = useState([]);
+  const [chosenCandidate, setChosenCandidate] = useState({});
 
   const [searchWord, setSearchWord] = useState("");
   const [paginationData, setPaginationData] = useState({ page: 1, limit: 20 });
@@ -35,6 +35,10 @@ export function CandidatesProvider({ children }) {
       });
   };
 
+  const chooseCandidate = (candi) => {
+    setChosenCandidate(candi);
+  };
+
   return (
     <CandidatesContext.Provider
       value={{
@@ -42,7 +46,7 @@ export function CandidatesProvider({ children }) {
         searchWord,
         paginationData,
         getCandidates,
-        setChosenCandidate,
+        chooseCandidate,
         chosenCandidate,
       }}
     >

@@ -4,27 +4,22 @@ import { Row, Col, Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function Candidate() {
-    const { candidateId } = useParams();
+  const { chosenCandidate } = useCandidates();
+  const navigate = useNavigate();
 
-  //   const { getCandidates, candidates, searchWord, paginationData } =
-  //     useCandidates();
-  //   const navigate = useNavigate();
-
-  //   const [page, setPage] = useState(0);
-  //   const [limit, setLimit] = useState(20);
-  //   const [currentCandidates, setCurrentCandidates] = useState([]);
-
-  //   useEffect(() => {
-  //     getCandidates();
-  //   }, []);
-
-  //   useEffect(() => {
-  //     setCurrentCandidates(candidates);
-  //   }, [candidates]);
-
+  const [currentCandidate, setCurrentCandidate] = useState({});
+  useEffect(() => {
+    if (chosenCandidate) {
+      setCurrentCandidate(chosenCandidate);
+    }
+  }, [chosenCandidate]);
   return (
-    <Container>
-      <Row></Row>
+    <Container className="dashboard-container">
+      <Row>
+        <h2>
+          {currentCandidate.first_name} {currentCandidate.last_name}
+        </h2>
+      </Row>{" "}
       <Row>Candidate</Row>
     </Container>
   );
