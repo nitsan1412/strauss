@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/auth-context";
 import validateForm from "../helper/validations";
-import { Button, Form, Col } from "react-bootstrap";
+import { Row, Form, Col } from "react-bootstrap";
 
 import InputField from "../components/form/InputField";
 import { useNavigate } from "react-router-dom";
@@ -31,16 +31,23 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const gotErrors = await validateForm(arrayForValidation, formData);
-    setErrors(gotErrors);
-    if (Object.keys(gotErrors).length === 0) {
+    const gotFormErrors = await validateForm(arrayForValidation, formData);
+    await setErrors(gotFormErrors.errors);
+    if (Object.keys(gotFormErrors.errors).length === 0) {
       login(formData);
     }
   };
 
   return (
-    <div className="login-container">
-      <div className="inner-container">
+    <Col
+      xs={{ span: 10, offset: 1 }}
+      sm={{ span: 8, offset: 2 }}
+      md={{ span: 6, offset: 3 }}
+      lg={{ span: 4, offset: 4 }}
+      xl={{ span: 4, offset: 4 }}
+      className="login-container"
+    >
+      <Row className="inner-container">
         <h2>Sign In</h2>
         <h4>For Registered Users </h4>
         <Form
@@ -73,14 +80,14 @@ export default function SignIn() {
             Sign In
           </button>
         </Form>
-      </div>
-      <div className="small_text_in_sign-in">
+      </Row>
+      <Row className="small_text_in_sign-in">
         <span>not a member yet? you might want to </span>
         <span onClick={() => navigate("/signup")} className="underline_text">
           sign up
         </span>
         <span> first</span>
-      </div>
-    </div>
+      </Row>
+    </Col>
   );
 }

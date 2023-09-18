@@ -49,13 +49,13 @@ exports.signUp = async (req, res) => {
       return callback(err);
     }
     if (existingUsers) {
-      return res.status(500).json({ error: "this username allready exists" });
+      return res.status(401).json({ error: "this username allready exists" });
     }
     dataAccess.createUser(newUser, (err, userId) => {
       if (err) {
         if (err.errno == 19)
           return res
-            .status(500)
+            .status(401)
             .json({ error: "this email allready in use for a different user" });
         else return res.status(500).json({ error: "Could not create user" });
       }

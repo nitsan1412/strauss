@@ -57,7 +57,11 @@ export default async function fetchData(url, chosenMethod, token, data) {
     default:
       break;
   }
-  if (options.method) {
-    return await fetch(`${URL}${url}`, options);
+  const response = await fetch(`${URL}${url}`, options);
+  if (response.ok) {
+    const data = await response.json();
+    return data; // Return the response data
+  } else {
+    return response.Error;
   }
 }

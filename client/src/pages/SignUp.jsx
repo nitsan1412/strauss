@@ -31,11 +31,14 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const gotErrors = await validateForm(arrayForValidation, formData);
-    await setErrors(gotErrors.errors);
-    await console.log("errors", errors);
-    if (Object.keys(gotErrors.errors).length === 0) {
-      register(formData);
+    const gotFormErrors = await validateForm(arrayForValidation, formData);
+    await setErrors(gotFormErrors.errors);
+    if (Object.keys(gotFormErrors.errors).length === 0) {
+      const gotErrorsFromDb = await register(formData);
+      await console.log("gotErrorsFromDb", gotErrorsFromDb);
+      // if (gotErrorsFromDb) {
+      //   setErrors(gotErrorsFromDb);
+      // }
     }
   };
   return (

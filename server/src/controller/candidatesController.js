@@ -6,7 +6,7 @@ exports.getAllCandidates = (req, res) => {
   // const { page, limit } = req.body;
   dataAccess.getAllCandidates((err, candidates) => {
     if (err) {
-      return res.status(500).json({ error: "Could not create user" });
+      return res.status(500).json({ error: "Could not get candidates" });
     }
     res.status(201).json({ candidates });
   });

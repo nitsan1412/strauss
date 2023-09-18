@@ -9,10 +9,10 @@ export function AuthProvider({ children }) {
   const login = (userData) => {
     console.log("userData");
     fetchData("/auth/signIn", "login", null, userData)
-      .then((data) => {
-        console.log("login data:", data);
-        setJwt(data.jwt);
-        setUser(data.user);
+      .then((res) => {
+        console.log("login data:", res);
+        setJwt(res.token);
+        // setUser(res.user);
       })
       .catch((error) => {
         console.error("Error fetching users:", error);
@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
   const register = async (userData) => {
     await fetchData("/auth/signup", "post", null, userData)
       .then(async (data) => {
-        console.log("registration data:", data);
+        console.log("/auth/signup data:", data);
         if (data.error) return data.error;
         await setUser(data.user);
         await login(data.user);
@@ -32,6 +32,7 @@ export function AuthProvider({ children }) {
       })
       .catch((error) => {
         console.error("Error fetching users:", error);
+        return error;
       });
     setUser(userData);
   };
