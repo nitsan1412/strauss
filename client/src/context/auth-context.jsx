@@ -24,8 +24,8 @@ export function AuthProvider({ children }) {
       .then(async (data) => {
         console.log("data in register", data);
         if (data == 401 || data == 402 || data.error) return data;
-        await setUser(data.user);
-        await login(data.user);
+        await setUser(userData);
+        await login(userData);
         // setJwt(data.jwt);
       })
       .catch((error) => {
