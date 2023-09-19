@@ -1,0 +1,149 @@
+.dashboard-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap
+}
+
+.rows-candidate-cards{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap
+}
+
+.rows-candidate-lists{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    flex-wrap: wrap
+}
+
+.candidate-small_text{
+    margin: 0rem 2rem;
+    font-size: 1rem;
+    justify-content: flex-start;
+    margin-bottom: 1rem;
+}
+
+
+
+.candidate-list-item{
+    flex:1;
+    width: 100vw;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    font-size: 1rem;
+    color: #90278E;
+    background-color: aqua;
+}
+
+.candidate-small-card{
+    flex:1;
+    width: 7rem;
+    height: 10rem;
+    border: solid #90278E 4px;
+    border-radius: 10%;
+    padding:1rem;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.7rem;
+  margin: 1rem;
+  color: #90278E;
+  background-color: aqua;
+}
+.candidate-small-card-img{
+    width: 5rem;
+    height:auto
+}
+
+.candidate-list-img{
+    width: 2rem;
+    height:auto
+}
+
+.candidate-small-card-button{
+    background-color: #40A5CB;
+    border-radius: 25px;
+    border: solid #90278E 1px;
+    font-size: 0.8rem;
+    color: rgb(177, 211, 241);
+    width:6rem;
+    cursor: pointer;
+
+}
+.candidate-small-card-button:hover{
+    background-color: #07b4ee;
+    color: rgb(14, 41, 65);
+}
+
+.list-button{
+    background-color: #40A5CB;
+    border-radius: 25px;
+    border: solid #90278E 1px;
+    font-size: 0.8rem;
+    color: rgb(177, 211, 241);
+    width:6rem;
+    cursor: pointer;
+
+}
+
+.pagination-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    width: 80%
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .pagination-div {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .pagination {
+    margin: 0 1px;
+  }
+  
+  .pagination .currPage {
+    cursor: pointer;
+    color: #fff;
+    background-color: cornflowerblue;
+    border: black 2px solid;
+    padding: 0.7rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+  }
+  
+   .pagination .notCurrPage {
+    cursor: pointer;
+    color: cornflowerblue;
+    background-color: #fff;
+    border: black 2px solid;
+    padding: 0.7rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+  }

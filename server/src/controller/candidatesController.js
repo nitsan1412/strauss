@@ -3,13 +3,17 @@ const dataAccess = require("./data-access");
 
 // Controller function to handle user registration
 exports.getAllCandidates = (req, res) => {
-  // const { page, limit } = req.body;
-  dataAccess.getAllCandidates((err, candidates) => {
-    if (err) {
-      return res.status(500).json({ error: "Could not get candidates" });
+  const { limit, offset } = req;
+  dataAccess.getAllCandidates(
+    limit ? limit : null,
+    offset ? offset : null,
+    (err, candidates) => {
+      if (err) {
+        return res.status(500).json({ error: "Could not get candidates" });
+      }
+      res.status(201).json({ candidates });
     }
-    res.status(201).json({ candidates });
-  });
+  );
 };
 
 // Controller function to handle user retrieval by username

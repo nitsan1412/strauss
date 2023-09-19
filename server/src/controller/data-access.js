@@ -58,13 +58,26 @@ exports.comparePassword = (candidatePassword, hash, callback) => {
   });
 };
 
-exports.getAllCandidates = (callback) => {
-  db.all("SELECT * FROM candidate ", (err, rows) => {
-    if (err) {
-      return callback(err);
-    }
-    callback(null, rows);
-  });
+exports.getAllCandidates = (limit, offset, callback) => {
+  if (limit !== null) {
+    db.all(
+      `SELECT * FROM candidate LIMIT ? OFFSET ?`,
+      [limit, offset || 0],
+      (err, rows) => {
+        if (err) {
+          return callback(err);
+        }
+        callback(null, rows);
+      }
+    );
+  } else {
+    db.all("SELECT * FROM candidate ", (err, rows) => {
+      if (err) {
+        return callback(err);
+      }
+      callback(null, rows);
+    });
+  }
 };
 
 exports.deleteUser = (userId, callback) => {

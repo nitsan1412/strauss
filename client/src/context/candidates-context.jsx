@@ -12,11 +12,17 @@ export function CandidatesProvider({ children }) {
   const [chosenCandidate, setChosenCandidate] = useState({});
 
   const [searchWord, setSearchWord] = useState("");
-  const [paginationData, setPaginationData] = useState({ page: 1, limit: 20 });
+  const [paginationData, setPaginationData] = useState({
+    page: 1,
+    limit: 20,
+    numberOfPages: 5,
+  });
 
   useEffect(() => {}, [searchWord, paginationData]);
-  const updatePaginationData = (newPagination) => {
-    setPaginationData(newPagination);
+
+  const updatePaginationData = async (field, value) => {
+    await setPaginationData({ ...paginationData, [field]: value });
+    await getCandidates();
   };
 
   const updateSearchWord = (newSearchWord) => {
@@ -24,11 +30,17 @@ export function CandidatesProvider({ children }) {
   };
 
   const getCandidates = () => {
-    console.log("jwt", jwt);
-    fetchData("/candidates/", "get", jwt)
+    fetchData(
+      `/candidates/${paginationData.page}/${paginationData.limit}`,
+      "get",
+      jwt
+    )
       .then((res) => {
         setCandidates(res.candidates);
-        // setUser(res.user);
+        setPaginationData({
+          ...paginationData,
+          numberOfPages: res.candidates.length.Math.ceil(paginationData.limit),
+        });
       })
       .catch((error) => {
         console.error("Error fetching users:", error);
@@ -48,6 +60,7 @@ export function CandidatesProvider({ children }) {
         getCandidates,
         chooseCandidate,
         chosenCandidate,
+        updatePaginationData,
       }}
     >
       {children}

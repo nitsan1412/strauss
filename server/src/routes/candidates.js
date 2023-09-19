@@ -10,7 +10,17 @@ const router = express.Router();
 //   return authController.signInUser(req.body);
 // });
 
-// Example protected route that requires authentication
+router.get("/:page/:limit", verifyToken, async (req, res) => {
+  const page = parseInt(req.params.page);
+  const limit = parseInt(req.params.limit);
+  return candidatesController.getAllCandidates(
+    { limit: limit, offset: (page - 1) * limit },
+    res
+  );
+
+  // res.status(200).json({ userId, username });
+});
+
 router.get("/", verifyToken, async (req, res) => {
   // Access user information from req.user
   // const { userId, username } = req.user;
