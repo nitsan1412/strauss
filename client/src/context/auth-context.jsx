@@ -22,7 +22,8 @@ export function AuthProvider({ children }) {
   const register = async (userData) => {
     await fetchData("/auth/signup", "post", null, userData)
       .then(async (data) => {
-        if (data.error) return data.error;
+        console.log("data in register", data);
+        if (data == 401 || data == 402 || data.error) return data;
         await setUser(data.user);
         await login(data.user);
         // setJwt(data.jwt);

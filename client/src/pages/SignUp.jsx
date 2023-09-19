@@ -36,9 +36,14 @@ export default function SignUp() {
     if (Object.keys(gotFormErrors.errors).length === 0) {
       const gotErrorsFromDb = await register(formData);
       await console.log("gotErrorsFromDb", gotErrorsFromDb);
-      // if (gotErrorsFromDb) {
-      //   setErrors(gotErrorsFromDb);
-      // }
+      if (gotErrorsFromDb == 401) {
+        setErrors({ ...errors, username: "this username allready exists" });
+      } else if (gotErrorsFromDb == 402) {
+        setErrors({
+          ...errors,
+          username: "a user with this email allready signed in",
+        });
+      }
     }
   };
   return (

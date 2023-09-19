@@ -15,7 +15,6 @@ export default async function fetchData(url, chosenMethod, token, data) {
       };
       break;
     case "post":
-      console.log("post call", data);
       options = {
         method: "POST",
         headers: {
@@ -62,10 +61,16 @@ export default async function fetchData(url, chosenMethod, token, data) {
     default:
       break;
   }
-  const response = await fetch(`${URL}${url}`, options);
-  if (response.ok) {
-    return await response.json();
-  } else {
-    return response.Error;
+  try {
+    const response = await fetch(`${URL}${url}`, options);
+    if (response.ok) {
+      return await response.json();
+    } else {
+      console.log(response.status);
+      return response.status;
+    }
+  } catch (error) {
+    console.error("An error occurred:", error);
+    throw error; // Re-throw the error to be handled by the caller
   }
 }

@@ -55,7 +55,7 @@ exports.signUp = async (req, res) => {
       if (err) {
         if (err.errno == 19)
           return res
-            .status(401)
+            .status(402)
             .json({ error: "this email allready in use for a different user" });
         else return res.status(500).json({ error: "Could not create user" });
       }
