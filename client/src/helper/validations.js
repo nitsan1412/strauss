@@ -1,24 +1,25 @@
-// export const validateLogin = (data) => {
-//   return {};
-// };
+export default function validateForm(fieldsArray, data) {
+  const FIELDS = {
+    email: {
+      validate: !/\S+@\S+\.\S+/.test(data.email),
+      error: "Invalid email format",
+    },
+    password: {
+      validate: data.password.length < 8,
+      error: "password must be at least 8 characters long",
+    },
+    username: {
+      validate: data.username.length < 4,
+      error: "username must be at least 4 characters long",
+    },
+  };
 
-// export const validateSignUp = (data) => {
-//   return {};
-// };
-
-export default function validateForm(keysArray, data) {
   const errors = {};
 
-  keysArray.forEach((key) => {
-    if (!data[key]) {
-      errors[key] = `${key} is a required field`;
-    } else if (key === "email" && !/\S+@\S+\.\S+/.test(data.email)) {
-      errors.email = "Invalid email format";
-    } else if (key === "password" && data.password.length < 8) {
-      errors.password = "password must be at least 8 characters long";
-    } else if (key === "username" && data.username.length < 4) {
-      errors.password = "username must be at least 4 characters long";
-    }
+  fieldsArray.forEach((field) => {
+    if (!data[field]) {
+      errors[field] = `${field} is a required field`;
+    } else if (FIELDS[field].validate) errors[field] = FIELDS[field].error;
   });
 
   return { errors };

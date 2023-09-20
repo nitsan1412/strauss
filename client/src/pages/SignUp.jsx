@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export default function SignUp() {
   const navigate = useNavigate();
   const arrayForValidation = ["username", "email", "password"];
-  const { register, jwt } = useAuth();
+  const { signup, jwt } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -35,7 +35,7 @@ export default function SignUp() {
     await setErrors(gotFormErrors.errors);
     if (Object.keys(gotFormErrors.errors).length === 0) {
       try {
-        const gotData = await register(formData);
+        const gotData = await signup(formData);
       } catch (error) {
         if (error.includes("username")) {
           setErrors({ username: error });

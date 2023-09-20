@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import "./form.css";
+import "../../styles/form.css";
 export default function InputField({
   lable,
   fieldName,
@@ -18,9 +18,7 @@ export default function InputField({
       <Form.Label>{lable}</Form.Label>
       <Form.Control
         type={type}
-        // controlId={fieldName}
         size="lg"
-        // aria-describedby="passwordHelpBlock"
         onChange={(e) => onChange(fieldName, e.target.value)}
         isInvalid={!!localErrors}
       />

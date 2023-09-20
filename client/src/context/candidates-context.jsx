@@ -6,7 +6,7 @@ const CandidatesContext = createContext();
 export const useCandidates = () => useContext(CandidatesContext);
 
 export function CandidatesProvider({ children }) {
-  const { jwt } = useAuth(); // Access the user object from the context
+  const { jwt } = useAuth();
   const [candidates, setCandidates] = useState([]);
   const [chosenCandidate, setChosenCandidate] = useState({});
 
@@ -16,14 +16,17 @@ export function CandidatesProvider({ children }) {
     numberOfPages: 5,
   });
 
+  useEffect(() => {
+    getCandidates();
+  }, [paginationData.page, paginationData.limit]);
+
   const updatePaginationData = async (field, value) => {
     await setPaginationData({ ...paginationData, [field]: value });
-    await getCandidates();
   };
 
-  const getCandidates = () => {
-    fetchData(
-      `/candidates/${paginationData.page}/${paginationData.limit}`,
+  const getCandidates = async () => {
+    await fetchData(
+      `/candidates/?page=${paginationData.page}&limit=${paginationData.limit}`,
       "get",
       jwt
     )

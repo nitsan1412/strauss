@@ -14,7 +14,7 @@ function generateToken(user) {
 
 // Function to check validity of a JWT token
 async function verifyToken(req, res, next) {
-  const token = await req.headers.authorization.split(" ")[1];
+  const token = await req.headers.authorization?.split(" ")[1];
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
   }

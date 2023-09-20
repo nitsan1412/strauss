@@ -55,14 +55,14 @@
     border-radius: 10%;
     padding:1rem;
     display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 0.7rem;
-  margin: 1rem;
-  color: #90278E;
-  background-color: aqua;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.7rem;
+    margin: 1rem;
+    color: #90278E;
+    background-color: aqua;
 }
 .candidate-small-card-img{
     width: 5rem;

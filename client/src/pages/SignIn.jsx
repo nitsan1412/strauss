@@ -11,7 +11,7 @@ export default function SignIn() {
 
   const navigate = useNavigate();
 
-  const { login, jwt } = useAuth();
+  const { signIn, jwt } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -34,7 +34,7 @@ export default function SignIn() {
     const gotFormErrors = await validateForm(arrayForValidation, formData);
     await setErrors(gotFormErrors.errors);
     if (Object.keys(gotFormErrors.errors).length === 0) {
-      login(formData);
+      signIn(formData);
     }
   };
 

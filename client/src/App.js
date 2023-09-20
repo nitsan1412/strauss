@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "../src/styles/App.css";
 import { AuthProvider } from "./context/auth-context";
 import { CandidatesProvider } from "./context/candidates-context";
 
@@ -11,8 +10,6 @@ import Candidate from "./pages/Candidate";
 
 import Layout from "./components/Layout";
 
-import Registration from "./pages/SignUp";
-import ProtectedRoute from "./pages/ProtectedRoute";
 export default function App() {
   return (
     <AuthProvider>
@@ -20,9 +17,7 @@ export default function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<SignIn />} />
-            {/* <Route path="/" element={<Home />} /> */}
             <Route path="/signup" element={<SignUp />} />
-
             <Route
               path="/candidate"
               element={
@@ -39,8 +34,6 @@ export default function App() {
                 </CandidatesProvider>
               }
             />
-            {/* <Route path="/candidate/:candidateId" component={Candidate} /> */}
-            {/* <ProtectedRoute path="/" component={<Home />} /> */}
           </Routes>
         </Layout>
       </BrowserRouter>

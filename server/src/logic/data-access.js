@@ -119,16 +119,12 @@ exports.getAllData = async (table, limit, offset) => {
 };
 
 exports.deleteItem = async (table, id) => {
-  console.log("table", table);
-  console.log("id", id);
   try {
     return await new Promise((resolve, reject) => {
       db.get(`DELETE FROM ${table} WHERE id = ? `, [id], (err, data) => {
         if (err) {
-          console.log(err);
           reject("err", err);
         } else {
-          console.log("data", data);
           resolve(data);
         }
       });

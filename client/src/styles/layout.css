@@ -5,10 +5,9 @@
 }
 
 .app-layout { 
-width: 100vw;
-display: flex;
-flex-direction: column;
-/* margin: 1rem; */
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
 }
 
 .app-header{
@@ -17,7 +16,6 @@ flex-direction: column;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    /* margin: 0rem 2rem; */
     align-items: center;
     background-color: #fdfdfd;
 
@@ -45,8 +43,6 @@ flex-direction: column;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-   /* position: relative; */
-   /* margin-bottom:2rem; */
    background-color: #3CA7CB;
 
 }
@@ -55,11 +51,11 @@ flex-direction: column;
     min-width: 100vw;
     height: 2rem;
     display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center;
-position: static;
-background-color: darkgray;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: static;
+    background-color: darkgray;
 }
 
 .login-container{
@@ -78,7 +74,7 @@ background-color: darkgray;
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 25px;
-color: #3C4157;
+    color: #3C4157;
 }
 .login_form{
     display: flex;
@@ -125,14 +121,14 @@ color: #3C4157;
 .submit_btn{
     margin-top: 1rem;
     padding: 0.5rem 1rem;
-border-radius: 15PX;
-background-color: #3CA7CB;
-border: none;
-cursor: pointer;
+    border-radius: 15PX;
+    background-color: #3CA7CB;
+    border: none;
+    cursor: pointer;
 }
 .submit_btn:hover{
 
-background-color: #03bafc;
-border: 1px solid black;
+    background-color: #03bafc;
+    border: 1px solid black;
 }
 

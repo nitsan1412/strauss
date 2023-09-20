@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCandidates } from "../context/candidates-context";
-import { Row, Col, Button, Card, Container } from "react-bootstrap";
+import { Row, Col, Button, Card } from "react-bootstrap";
 
-export default function CradsDashboard(currentCandidates) {
+export default function CradsDashboard({ chooseCandidate, candidates }) {
   const navigate = useNavigate();
-  const { chooseCandidate } = useCandidates();
-  const [candidatesToDislpay, setCandidatesToDislpay] = useState([]);
 
-  useEffect(() => {
-    if (currentCandidates.currentCandidates.length > 0) {
-      setCandidatesToDislpay(currentCandidates.currentCandidates);
-    }
-  }, [currentCandidates]);
   return (
     <Row className="rows-candidate-cards" gap={2}>
-      {candidatesToDislpay.length > 0 &&
-        candidatesToDislpay.map((cand, index) => {
+      {candidates.length > 0 &&
+        candidates.map((cand, index) => {
           return (
             <Col xs={12} sm={6} md={4} lg={2} key={index}>
               <Card className="candidate-small-card">

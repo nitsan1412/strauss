@@ -4,9 +4,9 @@ const candidatesController = require("../controller/candidatesController");
 
 const router = express.Router();
 
-router.get("/:page/:limit", verifyToken, async (req, res) => {
-  const page = parseInt(req.params.page);
-  const limit = parseInt(req.params.limit);
+router.get("/", verifyToken, async (req, res) => {
+  const page = req.query.page && parseInt(req.query.page);
+  const limit = req.query.limit && parseInt(req.query.limit);
   return candidatesController.getAllCandidates(
     { limit: limit, offset: (page - 1) * limit },
     res
