@@ -1,5 +1,4 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const { verifyToken } = require("../logic/jwtToken");
 const candidatesController = require("../controller/candidatesController");
 

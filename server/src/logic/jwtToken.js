@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const jwtSecret = process.env.JWT_SECRET;
 
 // Function to generate a JWT token
 function generateToken(user) {
@@ -13,18 +12,17 @@ function generateToken(user) {
   return jwt.sign(payload, process.env.JWT_SECRET, options);
 }
 
-function verifyToken(req, res, next) {
-  const token = req.headers.authorization.split(" ")[1];
+// Function to check validity of a JWT token
+async function verifyToken(req, res, next) {
+  const token = await req.headers.authorization.split(" ")[1];
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" });
   }
   jwt.verify(token, process.env.JWT_SECRET, (err, decodedUser) => {
     if (err) {
       console.error("JWT Verification Error:", err);
-
       return res.status(401).json({ error: "Invalid token" });
     }
-    // Attach the decoded token (user info) to the request object
     req.user = decodedUser;
     next();
   });

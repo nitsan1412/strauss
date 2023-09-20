@@ -1,10 +1,7 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
-const path = require("path");
-const dotenv = require("dotenv"); // If you're using environment variables
+const dotenv = require("dotenv"); 
 const authRoutes = require("./src/routes/auth");
-// const userRoutes = require("./src/routes/user");
 const candidatesRoutes = require("./src/routes/candidates");
 
 dotenv.config();
@@ -17,7 +14,6 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 app.use("/auth", authRoutes);
-// app.use("/user", userRoutes);
 app.use("/candidates", candidatesRoutes);
 
 // Handle errors and 404 (Not Found)

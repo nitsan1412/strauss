@@ -1,5 +1,4 @@
-const jwt = require("jsonwebtoken");
-const dataAccess = require("./data-access"); // Import your user model
+const dataAccess = require("../logic/data-access");
 const { generateToken } = require("../logic/jwtToken");
 const comparePassword = require("../logic/comparePassword");
 
@@ -22,7 +21,7 @@ exports.signInUser = async (req, res) => {
   }
 };
 
-exports.signUp = async (req, res) => {
+exports.signUpUser = async (req, res) => {
   try {
     const existingUser = await dataAccess.findItem("user", {
       username: req.body.username,
@@ -34,13 +33,9 @@ exports.signUp = async (req, res) => {
         const userCreated = await dataAccess.createItem("user", req.body);
         if (userCreated)
           return res.status(201).json({ message: "User created" });
-        else
-          return res.status(502).json({
-            error: "this email allready in use for a different user",
-          });
       } catch (error) {
+        // UNIQUE constraint failed: user.email
         if (error.errno == 19)
-          // UNIQUE constraint failed: user.email
           return res.status(502).json({
             error: "this email allready in use for a different user",
           });
@@ -53,15 +48,18 @@ exports.signUp = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  const { id } = req.params;
-
-  await dataAccess.deleteItem("user", { id: id }).then((err, row) => {
-    if (err) {
-      return res.status(500).json({ error: err });
-    }
-    if (row) {
-      res.status(200).json({ message: "Delete successful" });
-    }
-    return res.status(500).json({ error: "no user with this ID in the DB" });
-  });
+  try {
+    const { id } = req.params;
+    await dataAccess.deleteItem("user", id.toString()).then((err, row) => {
+      if (err) {
+        return res.status(500).json({ error: err });
+      }
+      if (row) {
+        res.status(200).json({ message: "Delete successful" });
+      }
+      return res.status(500).json({ error: "no user with this ID in the DB" });
+    });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
 };

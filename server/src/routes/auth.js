@@ -1,5 +1,5 @@
 const express = require("express");
-const authController = require("../controller/authController"); // Import the user controller
+const authController = require("../controller/authController"); 
 
 const router = express.Router();
 
@@ -9,9 +9,8 @@ router.post("/signin", async (req, res) => {
 });
 
 // POST /sign up user
-
 router.post("/signup", async (req, res) => {
-  return authController.signUp(req, res);
+  return authController.signUpUser(req, res);
 });
 
 // DELETE /delete user

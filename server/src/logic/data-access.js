@@ -36,7 +36,6 @@ exports.createItem = async (table, item) => {
         values,
         (err, res) => {
           if (err) {
-            console.error("Error in findItem:", err);
             reject(err);
           } else {
             resolve("success");
@@ -45,7 +44,6 @@ exports.createItem = async (table, item) => {
       );
     });
   } catch (error) {
-    console.error("Error in findItem:", error);
     throw error;
   }
 };
@@ -60,7 +58,6 @@ exports.findItem = async (table, data) => {
         values,
         (err, user) => {
           if (err) {
-            console.error("Error in findItem:", err);
             reject(err);
           } else {
             resolve(user);
@@ -69,16 +66,22 @@ exports.findItem = async (table, data) => {
       );
     });
   } catch (error) {
-    console.error("Error in findItem:", error);
     throw error;
   }
 };
 
 exports.count = async (table) => {
   try {
-    await db.get(`SELECT COUNT(*) as total FROM ${table}`);
+    return await new Promise((resolve, reject) => {
+      db.get(`SELECT COUNT(*) as total FROM ${table}`, (err, count) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(count);
+        }
+      });
+    });
   } catch (error) {
-    console.error("Error in findItem:", error);
     throw error;
   }
 };
@@ -87,40 +90,50 @@ exports.getAllData = async (table, limit, offset) => {
   try {
     if (limit !== null) {
       return await new Promise((resolve, reject) => {
-        db.all(`SELECT * FROM ${table} LIMIT ? OFFSET ?`, [limit, offset || 0]),
+        db.all(
+          `SELECT * FROM ${table} LIMIT ? OFFSET ?`,
+          [limit, offset || 0],
           (err, data) => {
             if (err) {
-              console.error("Error in findItem:", err);
               reject(err);
             } else {
               resolve(data);
             }
-          };
+          }
+        );
       });
     } else {
       return await new Promise((resolve, reject) => {
-        db.all(`SELECT * FROM ${table}`),
-          (err, data) => {
-            if (err) {
-              console.error("Error in getAllData:", err);
-              reject(err);
-            } else {
-              resolve(data);
-            }
-          };
+        db.all(`SELECT * FROM ${table}`, (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(data);
+          }
+        });
       });
     }
   } catch (error) {
-    console.error("Error in findItem:", error);
     throw error;
   }
 };
 
-exports.deleteItem = (table, idField) => {
-  db.get(`DELETE FROM ${table} WHERE ${Object.keys(idField)[0]} = ? `, [
-    Object.values(idField)[0],
-  ]).then((err, row) => {
-    if (err) return err;
-    return row;
-  });
+exports.deleteItem = async (table, id) => {
+  console.log("table", table);
+  console.log("id", id);
+  try {
+    return await new Promise((resolve, reject) => {
+      db.get(`DELETE FROM ${table} WHERE id = ? `, [id], (err, data) => {
+        if (err) {
+          console.log(err);
+          reject("err", err);
+        } else {
+          console.log("data", data);
+          resolve(data);
+        }
+      });
+    });
+  } catch (error) {
+    throw error;
+  }
 };
