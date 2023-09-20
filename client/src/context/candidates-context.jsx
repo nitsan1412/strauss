@@ -1,5 +1,4 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
-// import Game from "../logic/Game";
 import fetchData from "../services/api";
 
 import { useAuth } from "./auth-context";
@@ -11,22 +10,15 @@ export function CandidatesProvider({ children }) {
   const [candidates, setCandidates] = useState([]);
   const [chosenCandidate, setChosenCandidate] = useState({});
 
-  const [searchWord, setSearchWord] = useState("");
   const [paginationData, setPaginationData] = useState({
     page: 1,
     limit: 20,
     numberOfPages: 5,
   });
 
-  useEffect(() => {}, [searchWord, paginationData]);
-
   const updatePaginationData = async (field, value) => {
     await setPaginationData({ ...paginationData, [field]: value });
     await getCandidates();
-  };
-
-  const updateSearchWord = (newSearchWord) => {
-    setSearchWord(newSearchWord);
   };
 
   const getCandidates = () => {
@@ -55,7 +47,6 @@ export function CandidatesProvider({ children }) {
     <CandidatesContext.Provider
       value={{
         candidates,
-        searchWord,
         paginationData,
         getCandidates,
         chooseCandidate,

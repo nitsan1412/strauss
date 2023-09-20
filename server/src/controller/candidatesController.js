@@ -1,32 +1,32 @@
-const Candidate = require("../models/Candidate");
 const dataAccess = require("./data-access");
 
 // Controller function to handle user registration
-exports.getAllCandidates = (req, res) => {
-  const { limit, offset } = req;
-  dataAccess.getAllCandidates(
-    limit ? limit : null,
-    offset ? offset : null,
-    (err, candidates) => {
-      if (err) {
-        return res.status(500).json({ error: "Could not get candidates" });
-      }
-      res.status(201).json(candidates);
+exports.getAllCandidates = async (req, res) => {
+  try {
+    const { limit, offset } = req;
+    const totalCandidates = await dataAccess.count("candidate");
+    if (!totalCandidates) {
+      res.status(501).json({ message: "got 0 data" });
+    } else {
+      totalCandidates = countRow.total;
     }
-  );
-};
-
-// Controller function to handle user retrieval by username
-exports.getUserByUsername = (req, res) => {
-  const { username } = req.params;
-
-  userModel.findUserByUsernameAndPassword(username, (err, user) => {
-    if (err) {
-      return res.status(500).json({ error: "Error finding user" });
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+  try {
+    const data = await dataAccess.getAllData(
+      "candidate",
+      limit || null,
+      offset || null
+    );
+    if (data) {
+      res
+        .status(201)
+        .json({ candidates: rows, totalCandidates: totalCandidates });
+    } else {
+      res.status(501).json({ message: "got no data" });
     }
-    if (!user) {
-      return res.status(404).json({ error: "User not found" });
-    }
-    res.status(200).json(user);
-  });
+  } catch (error) {
+    return res.status(502).json({ error: error });
+  }
 };
