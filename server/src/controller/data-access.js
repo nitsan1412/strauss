@@ -31,7 +31,6 @@ exports.isNewUser = (data, callback) => {
   const { username } = data;
   db.get("SELECT * FROM user WHERE username = ?", [username], (err, rows) => {
     if (err) {
-      console.log("err in isNewUser", err);
       return callback(err);
     }
     return callback(null, rows);
@@ -50,7 +49,6 @@ exports.findUserByUsername = (username, callback) => {
 // Export a function to compare passwords during login
 exports.comparePassword = (candidatePassword, hash, callback) => {
   bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
-    console.log("isMatch", isMatch);
     if (err) {
       return callback(err);
     }
@@ -58,24 +56,36 @@ exports.comparePassword = (candidatePassword, hash, callback) => {
   });
 };
 
-exports.getAllCandidates = (limit, offset, callback) => {
+exports.getAllCandidates = async (limit, offset, callback) => {
+  let totalCandidates = 0;
+  await db.get("SELECT COUNT(*) as total FROM candidate", (err, countRow) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server error" });
+    } else {
+      totalCandidates = countRow.total;
+    }
+  });
   if (limit !== null) {
-    db.all(
+    await db.all(
       `SELECT * FROM candidate LIMIT ? OFFSET ?`,
       [limit, offset || 0],
       (err, rows) => {
         if (err) {
           return callback(err);
-        }
-        callback(null, rows);
+        } else
+          callback(null, {
+            candidates: rows,
+            totalCandidates: totalCandidates,
+          });
       }
     );
   } else {
-    db.all("SELECT * FROM candidate ", (err, rows) => {
+    await db.all("SELECT * FROM candidate ", (err, rows) => {
       if (err) {
         return callback(err);
       }
-      callback(null, rows);
+      callback(null, { candidates: rows, totalCandidates: totalCandidates });
     });
   }
 };

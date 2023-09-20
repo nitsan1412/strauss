@@ -41,30 +41,22 @@ exports.signInUser = (req, res) => {
 exports.signUp = async (req, res) => {
   const { username, email, password } = req.body;
   const newUser = new User(username, email, password);
-  console.log("newUser", newUser);
-
   await dataAccess.isNewUser(newUser, (err, existingUsers) => {
-    console.log("existingUsers", existingUsers);
     if (err) {
       return callback(err);
     }
     if (existingUsers) {
-      return res.status(401).json({ error: "this username allready exists" });
+      return res.status(501).json({ error: "this username allready exists" });
     }
     dataAccess.createUser(newUser, (err, userId) => {
       if (err) {
         if (err.errno == 19)
           return res
-            .status(402)
+            .status(502)
             .json({ error: "this email allready in use for a different user" });
         else return res.status(500).json({ error: "Could not create user" });
       }
-      // this.signInUser(newUser, (err, token) => {
-      //   if (err) {
-      //     return res.status(500).json({ error: "Could not login user" });
-      //   }
       return res.status(201).json({ message: "User created", userId });
-      // });
     });
   });
 };
@@ -76,7 +68,6 @@ exports.delete = async (req, res) => {
     if (err) {
       return res.status(500).json({ error: err });
     }
-    console.log("row", row);
     if (row) {
       res.status(200).json({ message: "Delete successful" });
     }

@@ -11,7 +11,7 @@ exports.getAllCandidates = (req, res) => {
       if (err) {
         return res.status(500).json({ error: "Could not get candidates" });
       }
-      res.status(201).json({ candidates });
+      res.status(201).json(candidates);
     }
   );
 };

@@ -39,7 +39,7 @@ export function CandidatesProvider({ children }) {
         setCandidates(res.candidates);
         setPaginationData({
           ...paginationData,
-          numberOfPages: res.candidates.length.Math.ceil(paginationData.limit),
+          numberOfPages: Math.ceil(res.totalCandidates / paginationData.limit),
         });
       })
       .catch((error) => {

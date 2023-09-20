@@ -18,7 +18,7 @@ export default function SignUp() {
 
   useEffect(() => {
     if (jwt) {
-      navigate("./dashboard");
+      navigate("../dashboard");
     }
   }, [jwt]);
 
@@ -34,15 +34,14 @@ export default function SignUp() {
     const gotFormErrors = await validateForm(arrayForValidation, formData);
     await setErrors(gotFormErrors.errors);
     if (Object.keys(gotFormErrors.errors).length === 0) {
-      const gotErrorsFromDb = await register(formData);
-      await console.log("gotErrorsFromDb", gotErrorsFromDb);
-      if (gotErrorsFromDb == 401) {
-        setErrors({ ...errors, username: "this username allready exists" });
-      } else if (gotErrorsFromDb == 402) {
-        setErrors({
-          ...errors,
-          username: "a user with this email allready signed in",
-        });
+      try {
+        const gotData = await register(formData);
+      } catch (error) {
+        if (error.includes("username")) {
+          setErrors({ username: error });
+        } else if (error.includes("email")) {
+          setErrors({ email: error });
+        }
       }
     }
   };

@@ -66,8 +66,8 @@ export default async function fetchData(url, chosenMethod, token, data) {
     if (response.ok) {
       return await response.json();
     } else {
-      console.log(response.status);
-      return response.status;
+      const errorText = (await JSON.parse(await response.text())).error;
+      throw errorText;
     }
   } catch (error) {
     console.error("An error occurred:", error);

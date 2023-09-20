@@ -6,31 +6,27 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [jwt, setJwt] = useState(null);
 
-  const login = (userData) => {
-    fetchData("/auth/signIn", "login", null, userData)
+  const login = async (userData) => {
+    await fetchData("/auth/signIn", "login", null, userData)
       .then((res) => {
         setJwt(res.token);
-        // setUser(res.user);
+        setUser(userData);
       })
       .catch((error) => {
         console.error("Error fetching users:", error);
       });
-    // Implement login logic here and set the user object if successful
-    setUser(userData);
   };
 
   const register = async (userData) => {
     await fetchData("/auth/signup", "post", null, userData)
       .then(async (data) => {
-        console.log("data in register", data);
-        if (data == 401 || data == 402 || data.error) return data;
-        await setUser(userData);
-        await login(userData);
-        // setJwt(data.jwt);
+        if (data) {
+          await setUser(userData);
+          await login(userData);
+        }
       })
       .catch((error) => {
-        console.error("Error fetching users:", error);
-        return error;
+        throw error;
       });
     setUser(userData);
   };
