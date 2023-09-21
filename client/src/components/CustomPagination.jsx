@@ -15,23 +15,16 @@ export default function CustomPagination({
   const createBtn = () => {
     let numBtns = [];
     for (let index = 1; index < totalPages + 1; index++) {
-      if (index === chosenPage) {
-        numBtns.push(
-          <div key={index}>
-            <button onClick={() => onPageChange(index)} className="currPage">
-              {index}
-            </button>
-          </div>
-        );
-      } else {
-        numBtns.push(
-          <div key={index}>
-            <button onClick={() => onPageChange(index)} className="notCurrPage">
-              {index}
-            </button>
-          </div>
-        );
-      }
+      numBtns.push(
+        <div key={index}>
+          <button
+            onClick={() => onPageChange(index)}
+            className={index === chosenPage ? "currPage" : "notCurrPage"}
+          >
+            {index}
+          </button>
+        </div>
+      );
     }
     return numBtns;
   };

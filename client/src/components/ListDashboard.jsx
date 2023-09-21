@@ -19,10 +19,10 @@ export default function ListDashboard({ chooseCandidate, candidates }) {
                   className="candidate-list-img"
                 />
               </Col>
-              <Col className="candidate-small_text">
+              <Col className="candidate-small-text">
                 {cand.first_name} {cand.last_name}
               </Col>
-              <Col className="candidate-small_text">{cand.job_title}</Col>
+              <Col className="candidate-small-text">{cand.job_title}</Col>
               <Button
                 className="candidate-small-list-button"
                 onClick={() => {

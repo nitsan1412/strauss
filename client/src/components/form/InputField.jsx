@@ -15,7 +15,7 @@ export default function InputField({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errors]);
   return (
-    <Row className="input_row">
+    <Row className="input-row">
       <Form.Label>{lable}</Form.Label>
       <Form.Control
         type={type}

@@ -6,7 +6,7 @@ import InputField from "../components/form/InputField";
 import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
-  const arrayForValidation = ["username", "password"];
+  const fieldsArray = ["username", "password"];
   const navigate = useNavigate();
   const { signIn, jwt } = useAuth();
   const [formData, setFormData] = useState({
@@ -29,9 +29,9 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const gotFormErrors = await validateForm(arrayForValidation, formData);
-    await setErrors(gotFormErrors.errors);
-    if (Object.keys(gotFormErrors.errors).length === 0) {
+    const resoponse = await validateForm(fieldsArray, formData);
+    await setErrors(resoponse.errors);
+    if (Object.keys(resoponse.errors).length === 0) {
       signIn(formData);
     }
   };

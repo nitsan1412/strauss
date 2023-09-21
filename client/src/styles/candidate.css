@@ -19,16 +19,15 @@
     margin: 1rem 2rem;
 }
 
-.candidate-small_text{
+.candidate-small-text{
     margin: 0rem 2rem;
     font-size: 1rem;
     justify-content: flex-start;
     margin-bottom: 1rem;
 }
 
-.underline_text{
+.candidate-underline-text{
     text-decoration: underline;
-    cursor: pointer;
 }
 
 .button-div{

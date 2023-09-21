@@ -29,24 +29,30 @@ function Candidate() {
           <h2 className="candidate-header-text">
             {currentCandidate.first_name} {currentCandidate.last_name}
           </h2>{" "}
-          <Row className="candidate-small_text">
-            <span onClick={() => navigate("/signup")}>candidate number: </span>
-            <span className="underline_text">{currentCandidate.id}</span>
+          <Row className="candidate-small-text">
+            <span>candidate number: </span>
+            <span className="candidate_underline_text">
+              {currentCandidate.id}
+            </span>
           </Row>
-          <Row className="candidate-small_text">
-            <span onClick={() => navigate("/signup")}>email: </span>
-            <span className="underline_text">{currentCandidate.email}</span>
+          <Row className="candidate-small-text">
+            <span>email: </span>
+            <span className="candidate_underline_text">
+              {currentCandidate.email}
+            </span>
           </Row>
-          <Row className="candidate-small_text">
-            <span onClick={() => navigate("/signup")}>gender: </span>
-            <span className="underline_text">
+          <Row className="candidate-small-text">
+            <span>gender: </span>
+            <span className="candidate_underline_text">
               {currentCandidate.gender === "Male" ? <FaMale /> : <FaFemale />}{" "}
               {currentCandidate.gender}
             </span>
           </Row>
-          <Row className="candidate-small_text">
-            <span onClick={() => navigate("/signup")}>occupation: </span>
-            <span className="underline_text">{currentCandidate.job_title}</span>
+          <Row className="candidate-small-text">
+            <span>occupation: </span>
+            <span className="candidate_underline_text">
+              {currentCandidate.job_title}
+            </span>
           </Row>
         </Col>
         <Col>
@@ -58,7 +64,7 @@ function Candidate() {
         </Col>
       </Row>
 
-      <Row className="candidate-small_text">
+      <Row className="candidate-small-text">
         <span onClick={() => navigate("/signup")}>
           what the candidate actualy does:{" "}
         </span>

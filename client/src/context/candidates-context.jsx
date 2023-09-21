@@ -9,7 +9,7 @@ export function CandidatesProvider({ children }) {
   const { jwt } = useAuth();
   const [candidates, setCandidates] = useState([]);
   const [chosenCandidate, setChosenCandidate] = useState({});
-
+  const [showInCards, setShowInCards] = useState(true);
   const [paginationData, setPaginationData] = useState({
     page: 1,
     limit: 100,
@@ -23,6 +23,10 @@ export function CandidatesProvider({ children }) {
 
   const updatePaginationData = (field, value) => {
     setPaginationData({ ...paginationData, [field]: value });
+  };
+
+  const changeDashboardDisplay = () => {
+    setShowInCards(!showInCards);
   };
 
   const getCandidates = async () => {
@@ -59,10 +63,12 @@ export function CandidatesProvider({ children }) {
       value={{
         candidates,
         paginationData,
+        chosenCandidate,
+        showInCards,
         getCandidates,
         chooseCandidate,
-        chosenCandidate,
         updatePaginationData,
+        changeDashboardDisplay,
       }}
     >
       {children}

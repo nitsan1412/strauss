@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useCandidates } from "../context/candidates-context";
 import { useAuth } from "../context/auth-context";
 import { Row, Button, Container } from "react-bootstrap";
@@ -11,14 +11,15 @@ import PageSize from "../components/PageSize";
 function Home() {
   const {
     getCandidates,
+    showInCards,
     candidates,
     updatePaginationData,
     paginationData,
     chooseCandidate,
+    changeDashboardDisplay,
   } = useCandidates();
   const { jwt } = useAuth();
   const navigate = useNavigate();
-  const [isList, setIsList] = useState(false);
 
   useEffect(() => {
     if (jwt) {
@@ -30,7 +31,7 @@ function Home() {
   }, []);
 
   const changeDisplay = () => {
-    setIsList(!isList);
+    changeDashboardDisplay();
   };
 
   return (
@@ -52,11 +53,11 @@ function Home() {
           onPageChange={(newpage) => updatePaginationData("page", newpage)}
         />
         <Button className="list-button" onClick={() => changeDisplay()}>
-          {isList ? "show in cards" : "show as a list"}
+          {showInCards ? "show in cards" : "show as a list"}
         </Button>
       </Row>
       {candidates.length > 0 ? (
-        isList ? (
+        !showInCards ? (
           <ListDashboard
             candidates={candidates}
             chooseCandidate={chooseCandidate}
