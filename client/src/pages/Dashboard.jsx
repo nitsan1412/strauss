@@ -7,6 +7,7 @@ import "../styles/dashboard.css";
 import CradsDashboard from "../components/CradsDashboard";
 import ListDashboard from "../components/ListDashboard";
 import CustomPagination from "../components/CustomPagination";
+import PageSize from "../components/PageSize";
 function Home() {
   const {
     getCandidates,
@@ -19,9 +20,6 @@ function Home() {
   const navigate = useNavigate();
   const [isList, setIsList] = useState(false);
 
-  const [page, setPage] = useState(paginationData.page || 0);
-  const [limit, setLimit] = useState(paginationData.limit || 20);
-
   useEffect(() => {
     if (jwt) {
       getCandidates();
@@ -29,11 +27,6 @@ function Home() {
       navigate("../");
     }
   }, []);
-
-  useEffect(() => {
-    setPage(paginationData.page);
-    setLimit(paginationData.limit);
-  }, [paginationData.page, paginationData.limit]);
 
   const changeDisplay = () => {
     setIsList(!isList);
@@ -45,11 +38,18 @@ function Home() {
         <h2>candidates</h2>
       </Row>
       <Row className="pagination-row">
+        <PageSize
+          currPageSize={paginationData.limit}
+          updatePageSize={(newLimit) => updatePaginationData("limit", newLimit)}
+        />
+      </Row>
+
+      <Row className="pagination-row">
         <CustomPagination
-          currentPage={page}
+          currentPage={paginationData.page}
           totalPages={paginationData.numberOfPages}
           onPageChange={(newpage) => updatePaginationData("page", newpage)}
-        />{" "}
+        />
         <Button className="list-button" onClick={() => changeDisplay()}>
           {isList ? "show in cards" : "show as a list"}
         </Button>

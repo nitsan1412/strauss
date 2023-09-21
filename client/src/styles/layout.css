@@ -12,7 +12,8 @@
 
 .app-header{
     min-width: 100vw;
-    height: 14vh;
+    height: 9vh;
+    min-height: 60px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -38,6 +39,7 @@
 .app-content{
     min-width: 100vw;
     height: fit-content;
+    min-height: calc(100vh - 9vh - 5vh);
     flex: 1;
     display: flex;
     flex-wrap: wrap;
@@ -49,7 +51,7 @@
 
 .app-footer{
     min-width: 100vw;
-    height: 2rem;
+    height: 5vh;
     display: flex;
     flex-direction: row;
     justify-content: center;

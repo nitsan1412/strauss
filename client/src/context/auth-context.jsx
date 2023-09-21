@@ -20,9 +20,9 @@ export function AuthProvider({ children }) {
   const signup = async (userData) => {
     await fetchData("/auth/signup", "post", null, userData)
       .then(async (data) => {
-        if (data) {
+        if (data.success) {
           await setUser(userData);
-          await signIn(userData);
+          await setJwt(data.token);
         }
       })
       .catch((error) => {

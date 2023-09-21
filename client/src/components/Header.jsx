@@ -15,7 +15,6 @@ export default function Header() {
         <Col xs={6} md={4}>
           <Image src={tamiLogo} href="#home" />
         </Col>
-        {/* <Navbar.Collapse className="justify-content-end"> */}
         {user ? (
           <div className="user-info-header-small">
             <Navbar.Text>Welcome </Navbar.Text>

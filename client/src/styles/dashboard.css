@@ -19,7 +19,6 @@
     width: 100vw;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     justify-content: center;
     flex-wrap: wrap
 }
@@ -29,6 +28,7 @@
     font-size: 1rem;
     justify-content: flex-start;
     margin-bottom: 1rem;
+    flex:3;
 }
 
 
@@ -41,10 +41,17 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    text-align: center;
+    text-align: flex-start;
     font-size: 1rem;
     color: #90278E;
     background-color: aqua;
+}
+.image-col-in-list{
+    flex:1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .candidate-small-card{
@@ -74,6 +81,18 @@
     height:auto
 }
 
+.candidate-small-list-button{
+    background-color: #40A5CB;
+    border-radius: 25px;
+    border: solid #90278E 1px;
+    font-size: 0.8rem;
+    color: rgb(177, 211, 241);
+    max-width:6rem;
+    margin-right: 2rem;
+    cursor: pointer;
+    flex:2;
+}
+
 .candidate-small-card-button{
     background-color: #40A5CB;
     border-radius: 25px;
@@ -82,35 +101,41 @@
     color: rgb(177, 211, 241);
     width:6rem;
     cursor: pointer;
-
+    flex:1;
 }
-.candidate-small-card-button:hover{
+
+.candidate-small-card-button:hover, .candidate-small-list-button:hover{
     background-color: #07b4ee;
     color: rgb(14, 41, 65);
 }
 
 .list-button{
-    background-color: #40A5CB;
+    background-color: #8ddcf9;
     border-radius: 25px;
     border: solid #90278E 1px;
     font-size: 0.8rem;
-    color: rgb(177, 211, 241);
+    color: rgb(7, 58, 102);
     width:6rem;
     cursor: pointer;
+}
+.list-button:hover{
+    background-color: #8deef9;
 
 }
 
 .pagination-row{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     text-align: center;
-    width: 80%
+    width: 100%;
+    margin-bottom: 1rem;
 }
 .pagination {
     display: flex;
     justify-content: center;
+    margin: 0 1px;
+
   }
   
   .pagination-div {
@@ -118,10 +143,6 @@
     margin: 0;
     padding: 0;
     display: flex;
-  }
-  
-  .pagination {
-    margin: 0 1px;
   }
   
   .pagination .currPage {
@@ -146,4 +167,31 @@
     text-decoration: none;
     display: inline-block;
     font-size: 1rem;
+  }
+
+  .pageSizeBtnsDiv {
+    display: flex;
+    justify-content: flex-start;
+    min-width: 80vw
+
+  }
+
+  .pageSizeBtnsDiv .pageSizeBtns {
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    margin-right: 0.3rem;
+  }
+  .currPageSizeBtn {
+    background-color: rgb(111, 217, 244) ;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    margin-right: 0.3rem;
+    padding: 1%;
   }

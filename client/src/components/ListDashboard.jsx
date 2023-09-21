@@ -7,12 +7,12 @@ export default function ListDashboard({ chooseCandidate, candidates }) {
   const navigate = useNavigate();
 
   return (
-    <Col className="rows-candidate-lists" gap={2}>
+    <Col className="rows-candidate-lists">
       {candidates.length > 0 &&
         candidates.map((cand, index) => {
           return (
             <Row key={index} className="candidate-list-item" gap={2}>
-              <Col>
+              <Col className="image-col-in-list">
                 <Card.Img
                   variant="top"
                   src={cand.avatar}
@@ -24,7 +24,7 @@ export default function ListDashboard({ chooseCandidate, candidates }) {
               </Col>
               <Col className="candidate-small_text">{cand.job_title}</Col>
               <Button
-                className="candidate-small-card-button"
+                className="candidate-small-list-button"
                 onClick={() => {
                   chooseCandidate(cand);
                   navigate(`/candidate`);

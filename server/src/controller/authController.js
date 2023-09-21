@@ -12,7 +12,6 @@ exports.signInUser = async (req, res) => {
       return res.status(401).json({ error: "Wrong password" });
     }
     const token = await generateToken({
-      userId: user.id,
       username: user.username,
     });
     return res.status(200).json({ message: "Login successful", token });
@@ -31,8 +30,12 @@ exports.signUpUser = async (req, res) => {
     } else {
       try {
         const userCreated = await dataAccess.createItem("user", req.body);
-        if (userCreated)
-          return res.status(201).json({ message: "User created" });
+        if (userCreated === "success") {
+          const token = await generateToken({
+            username: req.body.username,
+          });
+          return await res.status(200).json({ success: true, token });
+        }
       } catch (error) {
         // UNIQUE constraint failed: user.email
         if (error.errno == 19)

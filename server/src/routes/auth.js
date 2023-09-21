@@ -1,5 +1,6 @@
 const express = require("express");
 const authController = require("../controller/authController");
+const { verifyToken } = require("../logic/jwtToken");
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router.post("/signup", async (req, res) => {
 });
 
 // DELETE /delete user
-router.delete("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", verifyToken, async (req, res) => {
   return authController.delete(req, res);
 });
 
