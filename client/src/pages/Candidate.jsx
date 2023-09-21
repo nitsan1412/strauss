@@ -3,6 +3,9 @@ import { useCandidates } from "../context/candidates-context";
 import { Row, Col, Card, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../styles/candidate.css";
+import { RiArrowGoBackLine } from "react-icons/ri";
+import { FaFemale } from "react-icons/fa";
+import { FaMale } from "react-icons/fa";
 
 function Candidate() {
   const navigate = useNavigate();
@@ -16,6 +19,7 @@ function Candidate() {
     } else {
       navigate("../");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chosenCandidate]);
 
   return (
@@ -35,7 +39,10 @@ function Candidate() {
           </Row>
           <Row className="candidate-small_text">
             <span onClick={() => navigate("/signup")}>gender: </span>
-            <span className="underline_text">{currentCandidate.gender}</span>
+            <span className="underline_text">
+              {currentCandidate.gender === "Male" ? <FaMale /> : <FaFemale />}{" "}
+              {currentCandidate.gender}
+            </span>
           </Row>
           <Row className="candidate-small_text">
             <span onClick={() => navigate("/signup")}>occupation: </span>
@@ -67,6 +74,7 @@ function Candidate() {
             navigate("../dashboard");
           }}
         >
+          <RiArrowGoBackLine />
           back
         </div>
       </Row>

@@ -18,6 +18,7 @@ export function CandidatesProvider({ children }) {
 
   useEffect(() => {
     getCandidates();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [paginationData.page, paginationData.limit]);
 
   const updatePaginationData = (field, value) => {

@@ -12,6 +12,7 @@ export default function InputField({
   const [localErrors, setLocalErrors] = useState(errors[fieldName] || "");
   useEffect(() => {
     setLocalErrors(errors[fieldName] || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errors]);
   return (
     <Row className="input_row">

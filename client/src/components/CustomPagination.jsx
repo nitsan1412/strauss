@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Pagination } from "react-bootstrap";
 import "../styles/dashboard.css";
 
 export default function CustomPagination({

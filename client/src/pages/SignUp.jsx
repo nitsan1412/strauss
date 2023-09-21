@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/auth-context";
 import validateForm from "../helper/validations";
 import { Row, Form, Col } from "react-bootstrap";
-
 import InputField from "../components/form/InputField";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
-  const navigate = useNavigate();
   const arrayForValidation = ["username", "email", "password"];
+  const navigate = useNavigate();
   const { signup, jwt } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
@@ -20,6 +19,7 @@ export default function SignUp() {
     if (jwt) {
       navigate("../dashboard");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [jwt]);
 
   const handleChange = (field, value) => {
@@ -35,7 +35,7 @@ export default function SignUp() {
     await setErrors(gotFormErrors.errors);
     if (Object.keys(gotFormErrors.errors).length === 0) {
       try {
-        const gotData = await signup(formData);
+        await signup(formData);
       } catch (error) {
         if (error.includes("username")) {
           setErrors({ username: error });
